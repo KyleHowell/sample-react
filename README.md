@@ -1,0 +1,2 @@
+# BetYou
+Social wagering application
