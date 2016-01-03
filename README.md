@@ -1,3 +1,3 @@
 # BetYou
 ##A social wagering application
-I bet you this app is gonna be awesome.
+I BetYou this app is gonna be awesome.
