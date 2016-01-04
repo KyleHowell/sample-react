@@ -1,0 +1,21 @@
+#!/bin/bash
+
+npm config set registry http://registry.npmjs.org/
+npm install
+
+PATH=./node_modules/.bin:$PATH
+
+for f in $(find src -name main.jsx); do
+    DEST=$(dirname ${f/src/dist})
+    mkdir -p $DEST
+    browserify -t [ babelify --presets [ react ] ] $f > $DEST/main.js &
+done
+
+for f in $(find src -name main.less); do
+    DEST=$(dirname ${f/src/dist})
+    lessc $f $DEST/main.css &
+done
+
+rsync -a --exclude \*.js --exclude \*.jsx --exclude \*.less src/* dist/
+
+wait

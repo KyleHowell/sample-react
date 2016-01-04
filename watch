@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PATH=./node_modules/.bin:$PATH
+
+for f in $(find src -name main.jsx); do
+    DEST=$(dirname ${f/src/dist})
+    mkdir -p $DEST
+    watchify --poll=10000 -t babelify $f -o $DEST/main.js &
+done
+
+for f in $(find src -name main.less); do
+    DEST=$(dirname ${f/src/dist})
+    watchy --watch $f -- lessc $f $DEST/main.css &
+done
+
+http-server -p 1234
+
+watchy -w src -- rsync -a --exclude \*.js --exclude \*.jsx --exclude \*.less src/* dist/
+
+wait
