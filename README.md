@@ -1,8 +1,8 @@
 # BetYou
-##A social wagering application
+## A social wagering application
 I BetYou this app is gonna be awesome.
 
-#Development
+# Development
 Host dependencies:
 
     npm > 3.0.0
